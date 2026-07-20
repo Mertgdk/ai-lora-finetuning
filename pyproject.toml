@@ -1,0 +1,12 @@
+[project]
+name = "ai-lora-finetuning"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "numpy>=1.26.0",
+    "pytest>=8.3.3",
+    "streamlit>=1.38.0",
+    "torch>=2.3.0",
+]
