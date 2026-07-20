@@ -14,7 +14,8 @@ class LoRALayer(nn.Module):
         self.B = nn.Parameter(torch.zeros(rank, out_features))
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
-        return (x @ self.A.to(x.dtype) @ self.B.to(x.dtype)) * self.scaling
+        # T4 GPU bfloat16 matmul desteklemiyor -- float32'de hesapla, geri cast et
+        return ((x.float() @ self.A @ self.B) * self.scaling).to(x.dtype)
 
 
 class LinearWithLoRA(nn.Module):
