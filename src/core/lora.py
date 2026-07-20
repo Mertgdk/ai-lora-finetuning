@@ -14,7 +14,7 @@ class LoRALayer(nn.Module):
         self.B = nn.Parameter(torch.zeros(rank, out_features))
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
-        return (x @ self.A @ self.B) * self.scaling
+        return (x @ self.A.to(x.dtype) @ self.B.to(x.dtype)) * self.scaling
 
 
 class LinearWithLoRA(nn.Module):
