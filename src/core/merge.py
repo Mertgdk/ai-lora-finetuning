@@ -15,7 +15,7 @@ def merge_lora_weights(model: nn.Module) -> None:
     for name, module in targets:
         with torch.no_grad():
             delta = (module.lora.A @ module.lora.B) * module.lora.scaling
-            module.linear.weight.data += delta.T
+            module.linear.weight.data += delta.T.to(module.linear.weight.dtype)
             for param in module.linear.parameters():
                 param.requires_grad = True
 
